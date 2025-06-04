@@ -1,6 +1,6 @@
 # Amazon-AWS
 By Joash Pascal Anil, Student ID: 35375779
-Website: 
+Website: https://pickler.blog
 
 
 
@@ -14,7 +14,7 @@ To create the server, you'd want first to open up EC2 and then launch an instanc
 
 To start, name your server, obviously, and next is to choose the operating system, the operating system you'll need to replicate the website listed, will be the Ubuntu OS, and for the type of Ubuntu OS, you should choose, "Ubuntu Server 24.04 LTS (HVM), SSD Volume Type".
 
-After completing everything above, could you make a key pair? This key pair grants you a PEM file, which is used to access your website anywhere as long as you have the PEM file in your directory to access the website coding.
+After completing everything above, create a key pair. This key pair grants you a PEM file, which is used to access your website anywhere as long as you have the PEM file in your directory to access the website coding.
 
 Finally, the most critical part will be the website's network settings.
 
@@ -28,13 +28,13 @@ Congratulations, you've successfully created a server!
 
 # Step 3: Setting up the server.
 
-Before you do anything at all, first create an elastic IP. From there, could you associate your Elastic IP with your EC2 instance? By allocating your elastic IP, you are accessing your website firmly, meaning that your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
+Before you do anything at all, first create an elastic IP. From there, could you associate your Elastic IP with your EC2 instance? By allocating your elastic IP, you are accessing your website firmlyt your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
 
 Once you've completed associating your Elastic IP, you can start the server, head over to instances, click your instance and set your instance state to "start instance".
 
-Your IPV4 address should be the same as your Elastic IP.
+Your IPV4 address sould be the same as your Elastic IP.
 
-# Step 4: Accessing the web server remotely.
+# Step 4: Accessing  web server remotely.
 
 To access your server remotely, you first need the server up and running, from which you'll go to Amazon EC2 instances, and press connect while your server is active.
 
@@ -46,21 +46,59 @@ And finally, to access your server via command prompt/terminal, go over the exam
 
 # Step 5: Creating an Apache website.
 
-Now that you're using the SSH client, and the server is up and running, go ahead and enter the command "sudo apt update". This command updates your current software on your Ubuntu server, which will help in installing your Apache server. Once the update has finished, go ahead and paste this command: "sudo apt install apache2". This command installs Apache on your server.
+Now that you're using the SSH client, and the server is up and running, enter the command "sudo apt update". This command updates the software on your Ubuntu server, which will help install your Apache server. Once the update has finished, paste this command: "sudo apt install apache2". This command installs Apache on your server.
 
 And there you have it, your very own Apache server. You can edit your website via: "sudo nano /var/www/html/index.html".
 
-Sequentially, to open your website, grab your IP address and paste it into your browser like this, Http://<IP>.
+To open your website, grab your IP address and paste it into your browser like this, Http://<IP>.
 
-Note that you'll have to use HTTP to access your website currently, since modern browsers will auto-redirect your website to be HTTPS and not HTTP, and your website hasn't yet been configured to be a secure website.
+Just so you know, you'll have to use HTTP to access your website currently, since modern browsers will auto-redirect your website to HTTPS and not HTTP, and your website hasn't been configured to be a secure website.
 
 # Step 6: Linking your website to a domain.
 
-For this step, you'll need a debit card or some form of digital payment, crazy, isn't it?
+For this step, you'll need a debit card or some form of digital payment, which is easy.
 
 Head over to https://www.namecheap.com/
 
-Create an account and purchase a domain name of your choice, but if you ask me, choose something cheap that's billed yearly. My domain cost $5 in AUD, and you could buy this domain name called... "bloggers.it.com", up to you what domain name you'd like, but remember, all domain name prices vary.
+Create an account and purchase a domain name of your choice, but if you ask me, choose something cheap that's billed yearly. My domain costs $5 in AUD, and you can buy this domain name called... "bloggers.it.com". It's up to you what domain name you'd like, but remember, all domain name prices vary.
+
+Once your domain name is ready, you can just head to Amazon Route 53.
+
+From there, let's create a hosted zone, and it'll come with two records. For the name, you can just input the domain name you've purchased, set the type to a public hosted zone, and create the hosted zone.
+
+You'll have two records already created, which will be used to link the domain, but you'll need to make two additional documents.
+
+In your hosted zone, create a record, and from here, I recommend using the wizard preference, as it makes the instructions much easier to follow.
+
+Choose the simple routing for your routing, then define the simple record. From here, all  you need to do is route the traffic to your IP address, your Elastic IP address.
+
+Now, create another record, choose simple routing, define the simple record, and from here in your record name, input "www" and your route traffic to your domain name, e.g. pickler.blog.
+
+And finally, to allow your website to be registered, you need to go back to namecheap.com, where you'll go to your profile, access your dashboard, head over to the domain list, press manage, and head over to nameservers.
+
+Here, we'll need to add four lines of traffic. From your record in Amazon Route 53, find your four route traffics in your NS type record, and go back to Namecheap.com, where you'll create a custom DNS. Add all four traffic routes, and confirm that they have been saved.
+
+Typically, you'll have to wait maybe 10-15 minutes for Namecheap to connect to register through the custom DNS, but once it's done, your server can now be accessed via http://<domain name>. Isn't that just a beauty?
+
+# Step 7: converting your website from http to https
+
+This is the final step in setting up your website from HTTP to HTTPS.
+
+You can look at this website, which I used to set up HTTPS, but I'll walk you through how to set it up on your server.
+https://certbot.eff.org/instructions?ws=apache&os=snap 
+
+Moving on...
+
+Let's head back to our SSH client, which you should know how to use already. Let's install snapD on our server via this command: "sudo apt install snapd". Check if you've properly installed it via this command: "hello-world", it should come back with "Hello World!". With Snapd installed, we can now use certbot to convert our website into a secure HTTPS website.
+
+Enter these commands to flush out any CertBot OS packages: "sudo apt-get remove certbot", "sudo dnf remove certbot", "sudo yum remove certbot". Not all of them will work, but it's better to uninstall all of these to ensure that CertBot works properly. 
+
+Once that's done, let's install CertBot via: "sudo snap install --classic certbot". Check if CertBox can run via: "sudo ln -s /snap/bin/certbot /usr/bin/certbot".
+
+Once that's done, we can finally convert our server to https via this command: "sudo certbot --apache". Now, you will need to provide a domain name, so just enter your domain name, e.g. pickler.blog, and from there, the www will allow CertBox to convert your website into an HTTPS website. Make sure to turn on auto-renewal via this command: "sudo certbot renew --dry-run". Do a quick check on your website, enter https://<domain name>.
+
+And there you have it, your very own website! Your website is encrypted, linked to a domain name and can be accessed by anyone in the world!
+
 
 
 
