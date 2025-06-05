@@ -1,5 +1,4 @@
 # Amazon-AWS
-By Joash Pascal Anil, Student ID: 35375779
 Website: https://pickler.blog
 
 
