@@ -14,7 +14,7 @@ To create the server, you'd want first to open up EC2 and then launch an instanc
 
 To start, name your server, obviously, and next is to choose the operating system, the operating system you'll need to replicate the website listed, will be the Ubuntu OS, and for the type of Ubuntu OS, you should choose, "Ubuntu Server 24.04 LTS (HVM), SSD Volume Type".
 
-After completing everything above, create a key pair. This key pair grants you a PEM file, which is used to access your website anywhere as long as you have the PEM file in your directory to access the website coding.
+After you complete everything above, you can create a key pair. This key pair grants you a PEM file, which is used to access your website anywhere as long as you have the PEM file in your directory to access the website coding.
 
 Finally, the most critical part will be the website's network settings.
 
@@ -22,19 +22,19 @@ From here, it's crucial that you set up the network correctly. Head over to netw
 
 Storage is typically set as 8 GB; that's all you need.
 
-Press "Launch Instance", where you will get your key pair. DO NOT LOSE THIS FILE. Losing this file will permanently lose you access to remotely edit your server; you can only edit your Amazon EC2 instance via the website.
+Press "Launch Instance", where you will get your key pair. DO NOT LOSE THIS FILE. Losing this file will permanently lose access to your server remotely; you can only edit your Amazon EC2 instance via the website.
 
 Congratulations, you've successfully created a server!
 
 # Step 3: Setting up the server.
 
-Before you do anything at all, first create an elastic IP. From there, could you associate your Elastic IP with your EC2 instance? By allocating your elastic IP, you are accessing your website firmlyt your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
+Before you do anything at all, first create an elastic IP. From there, could you associate your Elastic IP with your EC2 instance? By allocating your elastic IP, you are accessing your website firmly; your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
 
 Once you've completed associating your Elastic IP, you can start the server, head over to instances, click your instance and set your instance state to "start instance".
 
-Your IPV4 address sould be the same as your Elastic IP.
+Your IPV4 address should be the same as your Elastic IP.
 
-# Step 4: Accessing  web server remotely.
+# Step 4: Accessing the  web server remotely.
 
 To access your server remotely, you first need the server up and running, from which you'll go to Amazon EC2 instances, and press connect while your server is active.
 
@@ -50,9 +50,9 @@ Now that you're using the SSH client, and the server is up and running, enter th
 
 And there you have it, your very own Apache server. You can edit your website via: "sudo nano /var/www/html/index.html".
 
-To open your website, grab your IP address and paste it into your browser like this, Http://<IP>.
+To open your website, paste your IP address into your browser like this: Http://<IP>.
 
-Just so you know, you'll have to use HTTP to access your website currently, since modern browsers will auto-redirect your website to HTTPS and not HTTP, and your website hasn't been configured to be a secure website.
+You'll have to use HTTP to access your website currently, since modern browsers will auto-redirect your website to HTTPS and not HTTP, and your website hasn't been configured to be secure.
 
 # Step 6: Linking your website to a domain.
 
@@ -62,17 +62,17 @@ Head over to https://www.namecheap.com/
 
 Create an account and purchase a domain name of your choice, but if you ask me, choose something cheap that's billed yearly. My domain costs $5 in AUD, and you can buy this domain name called... "bloggers.it.com". It's up to you what domain name you'd like, but remember, all domain name prices vary.
 
-Once your domain name is ready, you can just head to Amazon Route 53.
+Once your domain name is ready, you can head to Amazon Route 53.
 
 From there, let's create a hosted zone, and it'll come with two records. For the name, you can just input the domain name you've purchased, set the type to a public hosted zone, and create the hosted zone.
 
 You'll have two records already created, which will be used to link the domain, but you'll need to make two additional documents.
 
-In your hosted zone, create a record, and from here, I recommend using the wizard preference, as it makes the instructions much easier to follow.
+In your hosted zone, you can create a record, and from here, I recommend using the wizard preference, since it makes the instructions much easier to follow.
 
 Choose the simple routing for your routing, then define the simple record. From here, all  you need to do is route the traffic to your IP address, your Elastic IP address.
 
-Now, create another record, choose simple routing, define the simple record, and from here in your record name, input "www" and your route traffic to your domain name, e.g. pickler.blog.
+Now, create another record, choose simple routing, define the simple record, and from here in your record name, input "www" and your route traffic to your domain name, e.g. pickler. Blog.
 
 And finally, to allow your website to be registered, you need to go back to namecheap.com, where you'll go to your profile, access your dashboard, head over to the domain list, press manage, and head over to nameservers.
 
@@ -89,15 +89,15 @@ https://certbot.eff.org/instructions?ws=apache&os=snap
 
 Moving on...
 
-Let's head back to our SSH client, which you should know how to use already. Let's install snapD on our server via this command: "sudo apt install snapd". Check if you've properly installed it via this command: "hello-world", it should come back with "Hello World!". With Snapd installed, we can now use certbot to convert our website into a secure HTTPS website.
+Let's head back to our SSH client, which you should know how to use already. Let's install snapD on our server via this command: "sudo apt install snapd" and "sudo snap install hello-world". Check if you've correctly installed it via this command: "hello-world", it should come back with "Hello World!". With Snapd installed, we can now use certbot to convert our website into a secure HTTPS website.
 
-Enter these commands to flush out any CertBot OS packages: "sudo apt-get remove certbot", "sudo dnf remove certbot", "sudo yum remove certbot". Not all of them will work, but it's better to uninstall all of these to ensure that CertBot works properly. 
+Enter these commands to flush out any CertBot OS packages: "sudo apt-get remove certbot", "sudo dnf remove certbot", "sudo yum remove certbot". Not all of them will work, but it's better to uninstall them to ensure that CertBot works properly. 
 
 Once that's done, let's install CertBot via: "sudo snap install --classic certbot". Check if CertBox can run via: "sudo ln -s /snap/bin/certbot /usr/bin/certbot".
 
-Once that's done, we can finally convert our server to https via this command: "sudo certbot --apache". Now, you will need to provide a domain name, so just enter your domain name, e.g. pickler.blog, and from there, the www will allow CertBox to convert your website into an HTTPS website. Make sure to turn on auto-renewal via this command: "sudo certbot renew --dry-run". Do a quick check on your website, enter https://<domain name>.
+Once that's done, we can finally convert our server to https via this command: "sudo certbot --apache". Now, you will need to provide a domain name, so enter your domain name, e.g. pickler.blog, and from there, the www will allow CertBox to convert your website into an HTTPS website. Turn on auto-renewal via this command: "sudo certbot renew --dry-run". Quickly check your website, enter https://<domain name>.
 
-And there you have it, your very own website! Your website is encrypted, linked to a domain name and can be accessed by anyone in the world!
+And there you have it, your very own website! Your website is encrypted and linked to a domain name, and it can be accessed by anyone worldwide!
 
 
 
