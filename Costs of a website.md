@@ -21,4 +21,6 @@ $7.65 and 1 hour of set-up, total, $7.6646.
 
 # Total pricing per year.
 
+24-hour uptime, every day in a year, with renewal of the domain registry.
+
 $7.65 + 0.0146 * 24 * 365 = $135.546 yearly costs to maintain website.
