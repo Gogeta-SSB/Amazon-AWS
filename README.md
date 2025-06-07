@@ -5,7 +5,7 @@ Website: https://pickler.blog
 
 # Step 1: Setting up account details for your server.
 
-The first step is to purchase an EC2 instance from Amazon Web Services and create an account using your student email to avoid payment issues. You can open the Amazon EC2 and access the EC2 service from there.
+The first step is to purchase an EC2 instance from Amazon Web Services and create an account using your student email to avoid payment issues. You can open the Amazon EC2 and access the EC2 service from there. (link: https://aws.amazon.com/ec2/)
 
 # Step 2: Creating the server.
 
