@@ -66,8 +66,17 @@ And finally, to access your server via command prompt/terminal, go over the exam
 # Step 5: Creating an Apache website.
 
 Now that you're using the SSH client, and the server is up and running, enter the command "sudo apt update". This command updates the software on your Ubuntu server, which will help install your Apache server. Once the update has finished, paste this command: "sudo apt install apache2". This command installs Apache on your server.
+![image](https://github.com/user-attachments/assets/52d4a313-3010-4b8a-bcf1-50a8f739a8f3)
+
+![image](https://github.com/user-attachments/assets/6d6e468a-ebb5-4bd8-8546-9bf04517300c)
+
+
 
 And there you have it, your very own Apache server. You can edit your website via: "sudo nano /var/www/html/index.html".
+
+(should look like this)
+![image](https://github.com/user-attachments/assets/0cd1738c-e615-4620-8fcf-7cc9b473ba0e)
+
 
 To open your website, paste your IP address into your browser like this: Http://<IP>.
 
@@ -87,18 +96,27 @@ From there, let's create a hosted zone, and it'll come with two records. For the
 
 You'll have two records already created, which will be used to link the domain, but you'll need to make two additional documents.
 
+![image](https://github.com/user-attachments/assets/1f727320-05a3-4e33-b190-3732cd80f13a)
+(Should be similar to this, all Route 53 hosted zones are unique)
+
+
 In your hosted zone, you can create a record, and from here, I recommend using the wizard preference, since it makes the instructions much easier to follow.
 
-Choose the simple routing for your routing, then define the simple record. From here, all  you need to do is route the traffic to your IP address, your Elastic IP address.
+![image](https://github.com/user-attachments/assets/4c4c7015-ab9b-4ae4-a685-1fee116d302e)
 
-Now, create another record, choose simple routing, define the simple record, and from here in your record name, input "www" and your route traffic to your domain name, e.g. pickler. Blog.
+
+Choose the simple routing for your routing, then define the simple record. From here, all you need to do is route the traffic to your IP address, your Elastic IP address.
+
+Now, create another record, choose simple routing, define the simple record, and from here in your record name, input "www" and your route traffic to your domain name, e.g. pickler.Blog.
 
 And finally, to allow your website to be registered, you need to go back to namecheap.com, where you'll go to your profile, access your dashboard, head over to the domain list, press manage, and head over to nameservers.
 
 Here, we'll need to add four lines of traffic. From your record in Amazon Route 53, find your four route traffics in your NS type record, and go back to Namecheap.com, where you'll create a custom DNS. Add all four traffic routes, and confirm that they have been saved.
 
-Typically, you'll have to wait maybe 10-15 minutes for Namecheap to connect to register through the custom DNS, but once it's done, your server can now be accessed via http://<domain name>. Isn't that just a beauty?
+![image](https://github.com/user-attachments/assets/6ea13b33-972f-4137-a1de-384d622e1425)
+(should look similar to this)
 
+Typically, you'll have to wait maybe 10-15 minutes for Namecheap to connect to register through the custom DNS, but once it's done, your server can now be accessed via http://<domain name>.
 # Step 7: converting your website from http to https
 
 This is the final step in setting up your website from HTTP to HTTPS.
