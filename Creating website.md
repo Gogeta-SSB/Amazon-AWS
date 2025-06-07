@@ -13,11 +13,26 @@ To create the server, you'd want first to open up EC2 and then launch an instanc
 
 To start, name your server, obviously, and next is to choose the operating system, the operating system you'll need to replicate the website listed, will be the Ubuntu OS, and for the type of Ubuntu OS, you should choose, "Ubuntu Server 24.04 LTS (HVM), SSD Volume Type".
 
+![image](https://github.com/user-attachments/assets/d1d08ea2-a56a-4c1a-8deb-e13bdb2ed484)
+
+Choose a t2.micro instance for easy demand access.
+
+![image](https://github.com/user-attachments/assets/e2818cf0-a9c2-47a8-808c-177b33a1b04f)
+
+
+
+
 After you complete everything above, you can create a key pair. This key pair grants you a PEM file, which is used to access your website anywhere as long as you have the PEM file in your directory to access the website coding.
+
+![image](https://github.com/user-attachments/assets/778b1d35-d0a5-4b62-8d9f-a817e15fca63)
+
 
 Finally, the most critical part will be the website's network settings.
 
 From here, it's crucial that you set up the network correctly. Head over to network settings and press edit to set up the network. From there, add a new security group rule, making the type HTTP, and the source type as anywhere. 
+
+![image](https://github.com/user-attachments/assets/7c0ec702-4163-45a3-a791-66c7db7afd9d)
+
 
 Storage is typically set as 8 GB; that's all you need.
 
@@ -27,7 +42,10 @@ Congratulations, you've successfully created a server!
 
 # Step 3: Setting up the server.
 
-Before you do anything at all, first create an elastic IP. From there, could you associate your Elastic IP with your EC2 instance? By allocating your elastic IP, you are accessing your website firmly; your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
+Before you do anything at all, first create an elastic IP. From there, allocate your Elastic IP to your EC2 Instance. By allocating your elastic IP, you are accessing your website firmly; your IP address does not change continuously, which is essential for your website, as you'd want your IP address to be linked to a domain name. Still, if the IP address is inconsistent, there will be problems.
+
+![image](https://github.com/user-attachments/assets/340f9b51-ca79-4373-bd78-3870a538c480)
+(choose instance in resource type, choose your current instance in instance.)
 
 Once you've completed associating your Elastic IP, you can start the server, head over to instances, click your instance and set your instance state to "start instance".
 
@@ -42,6 +60,8 @@ Once in the connect section, you can use the "EC2 Instance Connect". You can use
 So... to access your server via command prompt/terminal, head over to the SSH client in Connect, and before you follow the instructions on there, create a folder with your PEM file, and make your current directory in command prompt/terminal to be set in the folder which contains your PEM file, or else you won't have suffient access to use your website.
 
 And finally, to access your server via command prompt/terminal, go over the example, and copy the sentence where it starts with "ssh", and paste it into your command prompt/terminal, and there you have it, access to your Amazon EC2 server via command prompt/terminal.
+
+![image](https://github.com/user-attachments/assets/875ab7ec-bb3d-4a40-9d31-edefa9491c06)
 
 # Step 5: Creating an Apache website.
 
