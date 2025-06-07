@@ -1,5 +1,5 @@
 # Amazon-AWS
-Website: https://pickler.blog
+Website: https://pickler.blog || Made by Joash Pascal Anil, Student ID: 35375779.
 
 Check out my link below if you want a walkthrough with instructions on how to create a website, following the guide created below.
 
